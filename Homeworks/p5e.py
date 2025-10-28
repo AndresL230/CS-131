@@ -1,0 +1,1 @@
+(x not 1) or (x not 2)

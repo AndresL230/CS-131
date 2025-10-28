@@ -1,0 +1,1 @@
+(s and t) and (p != q)

@@ -1,0 +1,1 @@
+not (a or b) or (a and not c) or not (not b and c)
