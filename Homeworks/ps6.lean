@@ -38,7 +38,9 @@ import Mathlib.Data.Real.Basic
 
 
 theorem problem_1 {a b c : Prop} :  (a →  (b ∧  c)) →  ((a ∧ a) →  (b ∧ c)) := by
-  sorry
+  intro h1
+
+
 
 -- *****************Problem 2**************
 --      (This problem is worth 20 points)
@@ -86,15 +88,15 @@ theorem problem_2  {a b c:Prop} :  ((a →  c) ∧  (b → c)) →  ((a ∧ b) �
 
 theorem problem_3 {a d : ℝ} : ((d + a) + (a - d))  = (2 * a)  := by
 calc
-  ((d + a) + (a - d)) = ((d + a) + ((0 - d) + a)) := by sorry
-  _                 = ((a + d) + ((0 - d) + a)) := by sorry
-  _                 = (a + (d + ((0 - d) + a))) := by sorry
-  _                 = (a + ((d + (0 - d)) + a)) := by sorry
-  _                 = (a + (((0 - d) + d) + a)) := by sorry
-  _                 = (a + ((d - d) + a)) := by sorry
-  _                 = (a + (0 + a)) := by sorry
-  _                 = (a + a) := by sorry
-  _                 = (2 * a) := by sorry
+  ((d + a) + (a - d)) = ((d + a) + ((0 - d) + a)) := by rw[zero_sub_add_eq_sub]
+  _                 = ((a + d) + ((0 - d) + a)) := by nth_rw 1 [add_comm d a]
+  _                 = (a + (d + ((0 - d) + a))) := by rw[add_assoc]
+  _                 = (a + ((d + (0 - d)) + a)) := by rw[add_assoc]
+  _                 = (a + (((0 - d) + d) + a)) := by nth_rw 3 [add_comm]
+  _                 = (a + ((d - d) + a)) := by rw[zero_sub_add_eq_sub]
+  _                 = (a + (0 + a)) := by rw[sub_self]
+  _                 = (a + a) := by rw[zero_add]
+  _                 = (2 * a) := by rw[two_mul]
 
 
 -- *****************Problem 4**************
