@@ -37,8 +37,14 @@ import Mathlib.Data.Real.Basic
 -- other tactics we saw in class.
 
 
-theorem problem_1 {a b c : Prop} :  (a →  (b ∧  c)) →  ((a ∧ a) →  (b ∧ c)) := by
+theorem problem_1 {a b c : Prop} :  (a →  (b ∧  c)) →  ((a ∧ a) →  (b ∧ c)) :=
+  by
+
   intro h1
+  intro h2
+  apply h1
+  exact h2.1
+
 
 
 
@@ -52,8 +58,13 @@ theorem problem_1 {a b c : Prop} :  (a →  (b ∧  c)) →  ((a ∧ a) →  (b 
 
 
 
-theorem problem_2  {a b c:Prop} :  ((a →  c) ∧  (b → c)) →  ((a ∧ b) →  c) := by
-  sorry
+theorem problem_2  {a b c:Prop} :  ((a →  c) ∧  (b → c)) →  ((a ∧ b) →  c) :=
+  by
+
+  intro h1
+  intro h2
+  apply h1.1
+  exact h2.1
 
 -- The next set of problems focuses on real numbers.
 
