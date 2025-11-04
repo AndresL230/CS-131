@@ -18,4 +18,14 @@ import Mathlib
 -- Set.mem_diff {α : Type u} {s t : Set α} (x : α) : x ∈ s \ t ↔ x ∈ s ∧ ¬x ∈ t
 -- Set.mem_inter_iff {α : Type u} {s t : Set α} (x : α) : x ∈ s ∩ t ↔ x ∈ s ∧ x ∈ t
 
-theorem problem_1 {U}  {A B : Set U}: (A \ (B ∩ A)) = (A \ B) :=  by sorry
+theorem problem_1 {U}  {A B : Set U}: (A \ (B ∩ A)) = (A \ B) :=  by
+  rw[Set.ext_iff]
+  intro x
+  calc
+    x ∈ (A \ (B ∩ A)) ↔ x ∈ A ∧ ¬(x ∈ (B ∩ A)) := by rw[Set.mem_diff]
+    _     ↔ x ∈ A ∧ ¬(x ∈ B ∧ x ∈ A) := by rw[Set.mem_inter_iff]
+    _     ↔ x ∈ A ∧ (¬x ∈ B ∨ ¬x ∈ A) := by rw[not_and_or]
+    _     ↔ (x ∈ A ∧ ¬x ∈ B) ∨ (x ∈ A ∧ ¬x ∈ A) := by rw[and_or_left]
+    _     ↔ (x ∈ A ∧ ¬x ∈ B) ∨ False := by rw[and_not_self_iff]
+    _     ↔ (x ∈ A ∧ ¬x ∈ B) := by rw[or_false]
+    _     ↔ x ∈ (A \ B) := by rw[Set.mem_diff]
