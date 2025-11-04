@@ -59,8 +59,7 @@ theorem third_theorem_fill {a b: Real} : a*b=0 -> (a + b)^2 = a^2 + b^2 :=
 
 
 
-theorem third_theorem {a b: Real} :
-  a*b=0 -> (a + b)^2 = a^2 + b^2 :=
+theorem third_theorem {a b: Real} : a*b=0 -> (a + b)^2 = a^2 + b^2 :=
   by
   intro h
   calc (a + b)^2 = (a+b) * (a+b) := by rw[pow_two]
