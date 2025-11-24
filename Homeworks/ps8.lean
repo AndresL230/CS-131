@@ -20,7 +20,17 @@ import Mathlib
 -- Prove that for all n ∈ ℕ, 2^n ≥ n.
 
 theorem problem1 (n : ℕ) : 2^n ≥ n := by
-sorry
+  induction n with
+  | zero =>
+    simp
+  | succ k ih =>
+    rw [Nat.pow_succ]
+    rw [Nat.mul_comm]
+    rw [Nat.two_mul]
+    have h1 : 2^k ≥ 1 := Nat.one_le_two_pow
+    have h2 : 2^k + 2^k ≥ 2^k + 1 := Nat.add_le_add_left h1 (2^k)
+    have h3 : 2^k + 1 ≥ k + 1 := Nat.add_le_add_right ih 1
+    apply Nat.le_trans h3 h2
 
 
 -- Problem 2, (15 points)
@@ -29,11 +39,18 @@ sorry
 -- Define a function problem2seq : ℕ → ℕ such that
 -- problem2seq(n) = a_n for all n ∈ ℕ.
 
-def problem2seq : ℕ  → ℕ
-| 0 => sorry
-| n+1 => sorry
+def problem2seq : ℕ → ℕ
+| 0 => 3
+| n+1 => problem2seq n + 9
 
 -- Prove that for all n ∈ ℕ, a_n = 3 + 9*n.
 
-theorem problem2 (n : ℕ ) : problem2seq n = 3 + 9 * n := by
-sorry
+theorem problem2 (n : ℕ) : problem2seq n = 3 + 9 * n := by
+  induction n with
+  | zero =>
+    rfl
+  | succ k ih =>
+    unfold problem2seq
+    rw [ih]
+    rw [Nat.mul_succ]
+    rw [Nat.add_assoc]
