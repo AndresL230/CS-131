@@ -87,6 +87,19 @@ theorem lemma_5 {k:ℕ }:
 -- rw, nth_rw, rfl, induction, cases, unfold, rfl, exact, apply,
 -- simp, constructor, intros, have, ring, .left, .right
 
-
 theorem myseq_bound (n : Nat) : myseq (n) = (3^n) - (2^n) := by
-  sorry
+  have aux : myseq n = 3^n - 2^n ∧ myseq (n+1) = 3^(n+1) - 2^(n+1) := by
+    induction n with
+    | zero =>
+      constructor
+      unfold myseq
+      ring
+      unfold myseq
+      ring
+    | succ k ih =>
+      constructor
+      exact ih.right
+      unfold myseq
+      rw [ih.right, ih.left]
+      ring
+  exact aux.left
