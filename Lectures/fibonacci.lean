@@ -1,4 +1,9 @@
-import Mathlib
+import Mathlib.Logic.Basic
+import Mathlib.Data.Real.Basic
+import Mathlib.Data.Nat.Basic
+import Mathlib.Data.Set.Basic
+import Mathlib.Algebra.Ring.Defs
+import Mathlib.Tactic
 
 -- Before we look into formalizing bounds on the Fibonacci numbers,
 -- let's recall how we can work with conjunctions in Lean.
