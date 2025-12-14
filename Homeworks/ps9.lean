@@ -34,7 +34,7 @@ def myseq: Nat → Int
 -- You may also find useful the following lemmas, which states
 -- algebraic identities of powers of 2 and 3.
 
-theorem lemma_1 {k:ℕ }: 6 * (3:ℤ) ^ k = 2 * 3 ^ (k + 1) := by
+theorem lemma_1 {k:ℕ}: 6 * (3:ℤ) ^ k = 2 * 3 ^ (k + 1) := by
   rw [pow_succ]
   nth_rw 3 [mul_comm]
   rw [<- mul_assoc]
@@ -59,10 +59,7 @@ theorem lemma_4 {k:ℕ}: 5*(3:ℤ)^(k+1) - 2*3^(k+1) = 3^(k+2) := by
 -- The next lemma combines the previous ones to prove the main step
 -- in the induction that you will need to complete the proof of
 -- myseq n = 3^n - 2^n for all natural numbers n.
-theorem lemma_5 {k:ℕ }:
-5 * ((3:ℤ)^ (k + 2) - 2 ^ (k + 2)) - 6 * (3 ^ (k + 1) - 2 ^ (k + 1))
-=
-3 ^ (k + 3) - 2 ^ (k + 3) := by
+theorem lemma_5 {k:ℕ }:5 * ((3:ℤ)^ (k + 2) - 2 ^ (k + 2)) - 6 * (3 ^ (k + 1) - 2 ^ (k + 1)) = 3 ^ (k + 3) - 2 ^ (k + 3) := by
   rw [mul_sub]
   rw [mul_sub]
   rw [sub_sub]
@@ -89,4 +86,18 @@ theorem lemma_5 {k:ℕ }:
 
 
 theorem myseq_bound (n : Nat) : myseq (n) = (3^n) - (2^n) := by
-  sorry
+  have aux : myseq n = 3^n - 2^n ∧ myseq (n+1) = 3^(n+1) - 2^(n+1) := by
+    induction n with
+    | zero =>
+      constructor
+      unfold myseq
+      ring
+      unfold myseq
+      ring
+    | succ k ih =>
+      constructor
+      exact ih.right
+      unfold myseq
+      rw [ih.right, ih.left]
+      ring
+  exact aux.left
