@@ -84,7 +84,6 @@ theorem lemma_5 {k:ℕ }:5 * ((3:ℤ)^ (k + 2) - 2 ^ (k + 2)) - 6 * (3 ^ (k + 1)
 -- rw, nth_rw, rfl, induction, cases, unfold, rfl, exact, apply,
 -- simp, constructor, intros, have, ring, .left, .right
 
-
 theorem myseq_bound (n : Nat) : myseq (n) = (3^n) - (2^n) := by
   have aux : myseq n = 3^n - 2^n ∧ myseq (n+1) = 3^(n+1) - 2^(n+1) := by
     induction n with
